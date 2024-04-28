@@ -23,7 +23,7 @@ env:
   CONFIG_FILE: configs/CR660X.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy.sh
-  UPLOAD_BIN_DIR: true
+  UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -108,21 +108,18 @@ jobs:
       if: (!cancelled())
       run: df -hT
 
-    - name: Upload bin directory
-      uses: actions/upload-artifact@main
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
-      with:
-        name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: openwrt/bin
-
     - name: Organize files
       id: organize
-      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
-        cd openwrt/bin/targets/*/*
+        cd $GITHUB_WORKSPACE/openwrt/bin/packages
+        tar -zcvf Packages.tar.gz ./*
+        cp Packages.tar.gz $GITHUB_WORKSPACE/openwrt/bin/targets/*/*
+        cd $GITHUB_WORKSPACE/openwrt/bin/targets/*/*
         rm -rf packages
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
-        echo "status=success" >> $GITHUB_OUTPUT
+        echo "::set-output name=status::success"
+        echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
 
     - name: Upload firmware directory
       uses: actions/upload-artifact@main
@@ -131,21 +128,12 @@ jobs:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
-    - name: Generate release tag
-      id: tag
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
-      run: |
-        echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
-        touch release.txt
-        [ ${UPLOAD_GOFILE} = true && ${{ steps.gofile.outputs.url }} ] && echo "🔗 [GoFile](${{ steps.gofile.outputs.url }})" >> release.txt
-        echo "status=success" >> $GITHUB_OUTPUT
-
     - name: Upload OpenWrt Firmware to Release
       id: release
       uses: ncipollo/release-action@main
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-        name: R${{ steps.organize.outputs.release_tag }} for SIM-AX18T
+        name: R${{ steps.organize.outputs.release_tag }} for AX-18T
         allowUpdates: true
         removeArtifacts: true
         tag: ${{ steps.organize.outputs.release_tag }}
