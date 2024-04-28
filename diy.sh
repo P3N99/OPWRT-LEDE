@@ -11,8 +11,8 @@
 #
 
 
-cp -f ./patch/mt7621_xiaomi_mi-router-cr660x.dts /target/linux/ramips/dts/mt7621_xiaomi_mi-router-cr660x.dts
-cp -f ./patch/02_network /target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+# cp -f ./patch/mt7621_xiaomi_mi-router-cr660x.dts /target/linux/ramips/dts/mt7621_xiaomi_mi-router-cr660x.dts
+# cp -f ./patch/02_network /target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 
 # 下载插件
 git clone https://github.com/gngpp/luci-theme-design package/luci-theme-design
