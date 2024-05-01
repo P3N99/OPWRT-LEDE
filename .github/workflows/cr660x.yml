@@ -93,6 +93,11 @@ jobs:
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
+    - name: change dts file
+      run: |
+        rm -rf target/linux/ramips/dts/mt7621_xiaomi_mi-router-cr660x.dts
+        wget https://github.com/P3N99/SIM-AX18T-lede/blob/main/patch/mt7621_xiaomi_mi-router-cr660x.dts -P target/linux/ramips/dts/
+
     - name: Compile the firmware
       id: compile
       run: |
