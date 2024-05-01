@@ -10,7 +10,7 @@
 # See /LICENSE for more information.
 #
 
-name: CR660X
+name: CR660X new
 
 on:
   repository_dispatch:
