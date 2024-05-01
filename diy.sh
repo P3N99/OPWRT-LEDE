@@ -27,7 +27,7 @@ cd package
 sed -i "s/OpenWrt /P3N9 build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" lean/default-settings/files/zzz-default-settings
 sed -i 's/OpenWrt/AX-1800T/' package/base-files/files/bin/config_generate
 #sed -i "/firewall\.user/d" lean/default-settings/files/zzz-default-settings
-sed -i 's/192.168.1.1/192.168.2.1/g' base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.3.1/g' base-files/files/bin/config_generate
 
 
 # Modify default IP
