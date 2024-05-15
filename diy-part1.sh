@@ -17,8 +17,10 @@
 echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 
+git clone --depth 1 https://github.com/chenmozhijin/luci-app-adguardhome package/luci-app-adguardhome
+
 cd package
-sed -i "s/OpenWrt /P3N9 build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" lean/default-settings/files/zzz-default-settings
+sed -i "s/OpenWrt /P3N9 build $(TZ=UTC-8 date "+%Y.%m.%d")/g" lean/default-settings/files/zzz-default-settings
 sed -i 's/192.168.1.1/192.168.3.1/g' base-files/files/bin/config_generate
 
 # 替换argon主题
