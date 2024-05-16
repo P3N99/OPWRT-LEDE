@@ -13,6 +13,10 @@
 # Uncomment a feed source
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
+# 删除冲突软件和依赖
+rm -rf feeds/packages/lang/golang 
+git clone https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+
 # Add a feed source
 echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
