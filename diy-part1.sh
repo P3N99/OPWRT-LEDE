@@ -17,7 +17,7 @@
 echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 
-git clone --depth 1 https://github.com/chenmozhijin/luci-app-adguardhome package/luci-app-adguardhome
+#git clone --depth 1 https://github.com/chenmozhijin/luci-app-adguardhome package/luci-app-adguardhome
 
 cd package
 sed -i "s/OpenWrt /P3N9 build $(TZ=UTC-8 date "+%Y.%m.%d")/g" lean/default-settings/files/zzz-default-settings
