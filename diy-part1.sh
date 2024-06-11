@@ -24,7 +24,7 @@ echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.co
 #git clone --depth 1 https://github.com/chenmozhijin/luci-app-adguardhome package/luci-app-adguardhome
 
 cd package
-sed -i "s/Lede /P3N9 Build on $(TZ=UTC-8 date "+%Y.%m.%d")/g" lean/default-settings/files/zzz-default-settings
+sed -i "s/Lede /P3N9 Build on $(TZ=UTC-8 date "+%Y.%m.%d")/g" @lean/default-settings/files/zzz-default-settings
 sed -i 's/192.168.1.1/192.168.3.1/g' base-files/files/bin/config_generate
 
 # 替换argon主题
