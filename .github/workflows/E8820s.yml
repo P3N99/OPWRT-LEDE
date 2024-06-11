@@ -133,7 +133,7 @@ jobs:
       uses: ncipollo/release-action@main
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-        name: R${{ steps.organize.outputs.release_tag }} for CMIOT AX18
+        name: R${{ steps.organize.outputs.release_tag }} for ZTE-E8820S
         allowUpdates: true
         removeArtifacts: true
         tag: ${{ steps.organize.outputs.release_tag }}
