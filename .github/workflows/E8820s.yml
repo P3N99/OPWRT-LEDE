@@ -133,7 +133,7 @@ jobs:
       uses: ncipollo/release-action@main
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-        name: R${{ steps.organize.outputs.release_tag }} for ZTE-E8820S
+        name: R${{ steps.organize.outputs.release_tag }} lede for ZTE-E8820S
         allowUpdates: true
         removeArtifacts: true
         tag: ${{ steps.organize.outputs.release_tag }}
@@ -144,6 +144,7 @@ jobs:
           - ZTE-E8820S
           - 默认IP：192.168.3.1
           - 默认密码：password
+          - SSR
 
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@main
