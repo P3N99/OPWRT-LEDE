@@ -10,7 +10,7 @@
 # See /LICENSE for more information.
 #
 
-name: build E8820s
+name: build R3G
 
 on:
   repository_dispatch:
